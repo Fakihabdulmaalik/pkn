@@ -8,277 +8,108 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --green-dark: #1B4332;
-    --green-mid: #2D6A4F;
-    --green-light: #40916C;
-    --green-bright: #52B788;
-    --green-pale: #74C69D;
-    --cream: #F5F1E8;
-    --cream-dark: #E8DFC8;
-    --dark: #0A1F15;
+    --green-dark: #1B4332; --green-mid: #2D6A4F; --green-light: #40916C;
+    --green-bright: #52B788; --cream: #F5F1E8; --cream-dark: #E8DFC8; --dark: #0A1F15;
   }
   * { font-family: 'Plus Jakarta Sans', sans-serif; }
   h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
-  body {
-    background: linear-gradient(135deg, #F5F1E8 0%, #E8DFC8 100%);
-    min-height: 100vh;
-    color: var(--dark);
-  }
-  /* Pattern botanical subtle */
+  body { background: linear-gradient(135deg, #F5F1E8 0%, #E8DFC8 100%); min-height: 100vh; color: var(--dark); }
   .botanical-pattern {
-    background-image: 
-      radial-gradient(circle at 10% 20%, rgba(27, 67, 50, 0.04) 0%, transparent 40%),
+    background-image: radial-gradient(circle at 10% 20%, rgba(27, 67, 50, 0.04) 0%, transparent 40%),
       radial-gradient(circle at 90% 80%, rgba(82, 183, 136, 0.06) 0%, transparent 40%),
       repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(27, 67, 50, 0.02) 40px, rgba(27, 67, 50, 0.02) 80px);
   }
   .green-gradient { background: linear-gradient(135deg, #1B4332 0%, #2D6A4F 100%); }
-  .green-gradient-light { background: linear-gradient(135deg, #40916C 0%, #52B788 100%); }
-  .glass {
-    background: rgba(245, 241, 232, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(27, 67, 50, 0.1);
-  }
-  .glass-white {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(20px);
-  }
+  .glass { background: rgba(245, 241, 232, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(27, 67, 50, 0.1); }
   .slide-up { animation: slideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
   @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
   .fade-in { animation: fadeIn 0.4s ease-out; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  
-  /* Option cards */
-  .option-card {
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid #D4C9A8;
-    background: white;
-    cursor: pointer;
-  }
-  .option-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--green-light);
-    box-shadow: 0 10px 25px -5px rgba(27, 67, 50, 0.15);
-  }
-  .option-card.selected {
-    background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-    border-color: var(--green-mid);
-    box-shadow: 0 4px 15px rgba(45, 106, 79, 0.25);
-  }
-  
-  /* Question nav buttons */
+  .option-card { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); border: 2px solid #D4C9A8; background: white; cursor: pointer; }
+  .option-card:hover { transform: translateY(-2px); border-color: var(--green-light); box-shadow: 0 10px 25px -5px rgba(27, 67, 50, 0.15); }
+  .option-card.selected { background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%); border-color: var(--green-mid); }
   .q-btn { transition: all 0.2s; cursor: pointer; }
-  .q-btn.answered {
-    background: linear-gradient(135deg, #40916C 0%, #2D6A4F 100%);
-    color: white; border-color: var(--green-mid);
-  }
-  .q-btn.current {
-    background: linear-gradient(135deg, #1B4332 0%, #0A1F15 100%);
-    color: white; transform: scale(1.1);
-    box-shadow: 0 4px 15px rgba(27, 67, 50, 0.4);
-  }
-  
-  /* Self-assessment buttons */
+  .q-btn.answered { background: linear-gradient(135deg, #40916C 0%, #2D6A4F 100%); color: white; border-color: var(--green-mid); }
+  .q-btn.current { background: linear-gradient(135deg, #1B4332 0%, #0A1F15 100%); color: white; transform: scale(1.1); }
   .self-btn { transition: all 0.2s; cursor: pointer; user-select: none; }
   .self-btn:hover { transform: scale(1.03); }
-  .self-btn.marked-correct {
-    background: linear-gradient(135deg, #40916C 0%, #2D6A4F 100%) !important;
-    color: white !important; border-color: var(--green-mid) !important;
-  }
-  .self-btn.marked-wrong {
-    background: linear-gradient(135deg, #B91C1C 0%, #7F1D1D 100%) !important;
-    color: white !important; border-color: #7F1D1D !important;
-  }
-  
-  /* Scrollbar */
+  .self-btn.marked-correct { background: linear-gradient(135deg, #40916C 0%, #2D6A4F 100%) !important; color: white !important; }
+  .self-btn.marked-wrong { background: linear-gradient(135deg, #B91C1C 0%, #7F1D1D 100%) !important; color: white !important; }
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: var(--cream); }
   ::-webkit-scrollbar-thumb { background: var(--green-mid); border-radius: 4px; }
-  
-  /* Topic chip */
-  .topic-chip {
-    display: inline-flex; align-items: center; justify-content: space-between; gap: 0.5rem;
-    padding: 0.75rem 1rem;
-    background: white;
-    border: 2px solid #D4C9A8;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    color: var(--green-dark);
-    transition: all 0.2s;
-  }
-  .topic-chip:hover { border-color: var(--green-light); transform: translateX(4px); }
-  .topic-chip .count {
-    background: var(--green-dark);
-    color: var(--cream);
-    padding: 0.2rem 0.6rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 700;
-  }
-  
-  /* Vinyl decoration */
-  .vinyl-accent {
-    background: radial-gradient(circle at center, #1B4332 0%, #2D6A4F 40%, #40916C 70%, #52B788 100%);
-    border-radius: 50%;
-    position: relative;
-  }
-  .vinyl-accent::before {
-    content: '';
-    position: absolute;
-    inset: 35%;
-    background: var(--cream);
-    border-radius: 50%;
-  }
-  .vinyl-accent::after {
-    content: '';
-    position: absolute;
-    inset: 42%;
-    background: var(--green-dark);
-    border-radius: 50%;
-  }
-  
-  /* Progress bar */
-  .progress-fill {
-    background: linear-gradient(90deg, #1B4332 0%, #40916C 50%, #52B788 100%);
-  }
+  .topic-chip { display: inline-flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0.75rem 1rem; background: white; border: 2px solid #D4C9A8; border-radius: 0.75rem; font-weight: 600; color: var(--green-dark); }
+  .topic-chip .count { background: var(--green-dark); color: var(--cream); padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; }
+  .progress-fill { background: linear-gradient(90deg, #1B4332 0%, #40916C 50%, #52B788 100%); }
 </style>
 </head>
 <body class="botanical-pattern">
 
-<!-- ============ START SCREEN ============ -->
+<!-- START SCREEN -->
 <div id="startScreen" class="min-h-screen flex items-center justify-center p-4 py-8">
-  <div class="max-w-5xl w-full slide-up">
+  <div class="max-w-3xl w-full slide-up">
     <div class="glass rounded-3xl shadow-2xl overflow-hidden">
-      
-      <!-- Top accent bar -->
       <div class="h-2" style="background: linear-gradient(90deg, #1B4332 0%, #40916C 50%, #52B788 100%);"></div>
-      
-      <div class="grid md:grid-cols-[1.1fr_1fr] gap-0">
-        <!-- Left: Dog Welcome Image -->
-        <div class="relative bg-gradient-to-br from-[#1B4332] to-[#2D6A4F] p-6 md:p-8 flex flex-col justify-center">
-          <!-- Decorative vinyl -->
-          <div class="absolute -top-10 -right-10 w-40 h-40 vinyl-accent opacity-20"></div>
-          <div class="absolute -bottom-8 -left-8 w-32 h-32 vinyl-accent opacity-10"></div>
-          
-
-            </div>
-            <div class="text-center">
-              <p class="text-[#74C69D] text-sm font-semibold tracking-widest mb-
-            </div>
-          </div>
+      <div class="p-8 md:p-12">
+        <div class="text-center mb-8">
+          <div class="inline-block px-4 py-1 bg-[#1B4332] text-[#F5F1E8] rounded-full text-xs font-bold mb-3 tracking-widest">STS 1 • 2026/2027</div>
+          <h1 class="serif text-4xl md:text-5xl font-black text-[#1B4332] leading-tight mb-2">Latihan <span class="italic text-[#40916C]">Pancasila</span></h1>
+          <p class="text-[#2D6A4F] text-lg">Kelas 9 SMP • Semester Ganjil</p>
         </div>
-        
-        <!-- Right: Info & Start -->
-        <div class="p-6 md:p-10 flex flex-col justify-center">
-          <div class="inline-block px-3 py-1 bg-[#1B4332] text-[#F5F1E8] rounded-full text-xs font-bold mb-3 tracking-widest w-fit">STS 1 • 2026/2027</div>
-          <h1 class="serif text-3xl md:text-4xl font-black text-[#1B4332] leading-tight mb-2">Latihan <span class="italic text-[#40916C]">Pancasila</span></h1>
-          <p class="text-[#2D6A4F] text-sm mb-6">Kelas 9 SMP • Semester Ganjil</p>
-          
-          <div class="space-y-2.5 mb-6">
-            <div class="topic-chip">
-              <span>📜 Dinamika Penjajahan</span>
-              <span class="count">5</span>
-            </div>
-            <div class="topic-chip">
-              <span>🤝 Konsensus Dasar</span>
-              <span class="count">22</span>
-            </div>
-            <div class="topic-chip">
-              <span>🏛️ Sistem Pemerintahan</span>
-              <span class="count">8</span>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-3 gap-2 mb-6 text-center">
-            <div class="p-3 bg-white rounded-xl border-2 border-[#D4C9A8]">
-              <div class="text-xs text-[#2D6A4F] font-bold">PG</div>
-              <div class="text-xl font-black text-[#1B4332]">20</div>
-            </div>
-            <div class="p-3 bg-white rounded-xl border-2 border-[#D4C9A8]">
-              <div class="text-xs text-[#2D6A4F] font-bold">ISIAN</div>
-              <div class="text-xl font-black text-[#1B4332]">10</div>
-            </div>
-            <div class="p-3 bg-white rounded-xl border-2 border-[#D4C9A8]">
-              <div class="text-xs text-[#2D6A4F] font-bold">ESAI</div>
-              <div class="text-xl font-black text-[#1B4332]">5</div>
-            </div>
-          </div>
-
-          <div class="mb-6 p-3 bg-[#E8F5E9] border-l-4 border-[#40916C] rounded-r-lg">
-            <p class="text-xs text-[#1B4332] leading-relaxed">
-              <strong>📌 Mode Penilaian Pribadi:</strong> Kerjakan semua soal → lihat kunci jawaban → tandai sendiri Benar/Salah → skor dihitung otomatis.
-            </p>
-          </div>
-
-          <button onclick="startQuiz()" class="w-full py-4 green-gradient text-[#F5F1E8] font-bold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-lg">
-            Mulai Latihan
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-          </button>
+        <div class="space-y-3 mb-8">
+          <h3 class="font-bold text-[#1B4332] text-center mb-4">Materi Ujian:</h3>
+          <div class="topic-chip"><span>📜 Dinamika Penjajahan</span><span class="count">5</span></div>
+          <div class="topic-chip"><span>🤝 Konsensus Dasar</span><span class="count">22</span></div>
+          <div class="topic-chip"><span>🏛️ Sistem Pemerintahan</span><span class="count">8</span></div>
         </div>
+        <div class="grid grid-cols-3 gap-3 mb-8">
+          <div class="p-4 bg-white rounded-xl border-2 border-[#D4C9A8] text-center"><div class="text-xs text-[#2D6A4F] font-bold mb-1">PILIHAN GANDA</div><div class="text-3xl font-black text-[#1B4332]">20</div></div>
+          <div class="p-4 bg-white rounded-xl border-2 border-[#D4C9A8] text-center"><div class="text-xs text-[#2D6A4F] font-bold mb-1">ISIAN</div><div class="text-3xl font-black text-[#1B4332]">10</div></div>
+          <div class="p-4 bg-white rounded-xl border-2 border-[#D4C9A8] text-center"><div class="text-xs text-[#2D6A4F] font-bold mb-1">URAIAN</div><div class="text-3xl font-black text-[#1B4332]">5</div></div>
+        </div>
+        <div class="mb-8 p-4 bg-[#E8F5E9] border-l-4 border-[#40916C] rounded-r-lg">
+          <p class="text-sm text-[#1B4332]"><strong>📌 Mode Penilaian Pribadi:</strong> Kerjakan → lihat kunci jawaban → tandai Benar/Salah sendiri → skor otomatis.</p>
+        </div>
+        <button onclick="startQuiz()" class="w-full py-4 green-gradient text-[#F5F1E8] font-bold rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-lg">
+          Mulai Latihan <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ============ QUIZ SCREEN ============ -->
+<!-- QUIZ SCREEN -->
 <div id="quizScreen" class="hidden min-h-screen p-4">
   <div class="max-w-7xl mx-auto">
-    <!-- Top Bar -->
     <div class="glass rounded-2xl shadow-lg p-4 mb-4 flex items-center justify-between flex-wrap gap-3">
-      <div class="flex items-center gap-3">
-        <div class="w-12 h-12 green-gradient rounded-xl flex items-center justify-center text-[#F5F1E8] font-black text-xl shadow-lg">PP</div>
-        <div>
-          <h1 class="font-bold text-[#1B4332] text-lg leading-tight">Pendidikan Pancasila</h1>
-          <p class="text-xs text-[#2D6A4F]">Latihan STS 1 • Kelas 9</p>
-        </div>
-      </div>
-      <div class="text-sm font-semibold text-[#1B4332]">
-        Soal <span id="currentNum" class="text-[#40916C] text-lg">1</span> / <span id="totalNum">35</span>
-      </div>
+      <div class="flex items-center gap-3"><div class="w-12 h-12 green-gradient rounded-xl flex items-center justify-center text-[#F5F1E8] font-black text-xl">PP</div>
+        <div><h1 class="font-bold text-[#1B4332] text-lg">Pendidikan Pancasila</h1><p class="text-xs text-[#2D6A4F]">Latihan STS 1 • Kelas 9</p></div></div>
+      <div class="text-sm font-semibold text-[#1B4332]">Soal <span id="currentNum" class="text-[#40916C] text-lg">1</span> / <span id="totalNum">35</span></div>
     </div>
-
     <div class="grid md:grid-cols-[1fr_300px] gap-4">
-      <!-- Question Area -->
       <div class="glass rounded-2xl shadow-lg overflow-hidden">
-        <div class="h-1.5 bg-[#D4C9A8]">
-          <div id="progressBar" class="h-full progress-fill transition-all duration-500" style="width: 0%"></div>
-        </div>
-        
+        <div class="h-1.5 bg-[#D4C9A8]"><div id="progressBar" class="h-full progress-fill transition-all duration-500" style="width: 0%"></div></div>
         <div class="p-6 md:p-10">
           <div class="flex items-center gap-2 mb-4 flex-wrap">
-            <span id="topicBadge" class="px-3 py-1 bg-[#1B4332] text-[#F5F1E8] text-xs font-bold rounded-full uppercase tracking-wide">Topik</span>
+            <span id="topicBadge" class="px-3 py-1 bg-[#1B4332] text-[#F5F1E8] text-xs font-bold rounded-full uppercase">Topik</span>
             <span id="typeBadge" class="px-3 py-1 bg-[#D4C9A8] text-[#1B4332] text-xs font-bold rounded-full uppercase">Pilihan Ganda</span>
           </div>
-          
           <div id="questionContent" class="min-h-[300px]"></div>
         </div>
-        
         <div class="bg-[#E8DFC8]/50 border-t border-[#D4C9A8] p-4 flex items-center justify-between gap-3 flex-wrap">
-          <button onclick="changeQ(-1)" id="prevBtn" class="px-5 py-2.5 bg-white border-2 border-[#D4C9A8] rounded-xl font-semibold text-[#1B4332] hover:border-[#40916C] hover:text-[#40916C] transition disabled:opacity-40">
-            ← Sebelumnya
-          </button>
-          <button onclick="changeQ(1)" id="nextBtn" class="px-5 py-2.5 green-gradient text-[#F5F1E8] rounded-xl font-semibold shadow-md hover:shadow-lg transition flex items-center gap-2">
-            Selanjutnya →
-          </button>
-          <button onclick="submitQuiz()" id="submitBtn" class="hidden px-5 py-2.5 bg-[#1B4332] text-[#F5F1E8] rounded-xl font-semibold shadow-md hover:bg-[#0A1F15] transition flex items-center gap-2">
-            ✓ Lihat Kunci Jawaban
-          </button>
+          <button onclick="changeQ(-1)" id="prevBtn" class="px-5 py-2.5 bg-white border-2 border-[#D4C9A8] rounded-xl font-semibold text-[#1B4332] hover:border-[#40916C] disabled:opacity-40">← Sebelumnya</button>
+          <button onclick="changeQ(1)" id="nextBtn" class="px-5 py-2.5 green-gradient text-[#F5F1E8] rounded-xl font-semibold shadow-md">Selanjutnya →</button>
+          <button onclick="submitQuiz()" id="submitBtn" class="hidden px-5 py-2.5 bg-[#1B4332] text-[#F5F1E8] rounded-xl font-semibold">✓ Lihat Kunci Jawaban</button>
         </div>
       </div>
-
-      <!-- Sidebar -->
       <div class="glass rounded-2xl shadow-lg p-5 h-fit md:sticky md:top-4">
-        <h3 class="font-bold text-[#1B4332] mb-3 flex items-center gap-2">
-          <span class="w-2 h-2 bg-[#40916C] rounded-full"></span> Navigasi Soal
-        </h3>
+        <h3 class="font-bold text-[#1B4332] mb-3 flex items-center gap-2"><span class="w-2 h-2 bg-[#40916C] rounded-full"></span> Navigasi Soal</h3>
         <div class="grid grid-cols-5 gap-2 mb-4" id="qGrid"></div>
-        
         <div class="space-y-2 text-xs pt-3 border-t border-[#D4C9A8]">
           <div class="flex items-center gap-2"><span class="w-4 h-4 bg-[#40916C] rounded"></span> Sudah dijawab</div>
           <div class="flex items-center gap-2"><span class="w-4 h-4 bg-white border-2 border-[#D4C9A8] rounded"></span> Belum dijawab</div>
           <div class="flex items-center gap-2"><span class="w-4 h-4 bg-[#1B4332] rounded"></span> Soal aktif</div>
         </div>
-        
         <div class="mt-4 p-3 bg-[#E8F5E9] rounded-xl text-center border border-[#74C69D]">
           <div class="text-xs text-[#2D6A4F] font-bold">TERJAWAB</div>
           <div class="text-2xl font-black text-[#1B4332]"><span id="answeredCount">0</span>/35</div>
@@ -288,52 +119,33 @@
   </div>
 </div>
 
-<!-- ============ RESULT SCREEN ============ -->
+<!-- RESULT SCREEN -->
 <div id="resultScreen" class="hidden min-h-screen p-4 py-8">
   <div class="max-w-4xl mx-auto">
     <div class="glass rounded-3xl shadow-2xl overflow-hidden slide-up">
       <div class="h-2" style="background: linear-gradient(90deg, #1B4332 0%, #40916C 50%, #52B788 100%);"></div>
-      
-      <!-- Header -->
-      <div class="green-gradient p-8 md:p-12 text-[#F5F1E8] text-center relative overflow-hidden">
-        <div class="absolute -top-10 -right-10 w-40 h-40 vinyl-accent opacity-20"></div>
-        <div class="absolute -bottom-10 -left-10 w-32 h-32 vinyl-accent opacity-15"></div>
-        
-        <div class="relative z-10">
-          <div class="inline-block px-4 py-1 bg-[#F5F1E8] text-[#1B4332] rounded-full text-xs font-bold mb-4 tracking-widest">PENILAIAN PRIBADI</div>
-          <h2 class="serif text-2xl md:text-3xl font-bold mb-2">Cocokkan Jawabanmu</h2>
-          <p class="text-[#74C69D] text-sm mb-6">Tandai setiap soal sebagai <strong class="text-[#F5F1E8]">Benar</strong> atau <strong class="text-[#F5F1E8]">Salah</strong></p>
-          
-          <div class="inline-block bg-white/10 backdrop-blur rounded-2xl p-6 border-2 border-white/20">
-            <div class="text-6xl md:text-7xl font-black mb-1" id="finalScore">0</div>
-            <div class="text-[#74C69D] text-sm">dari 100 poin</div>
-          </div>
-          <p class="mt-4 text-lg font-semibold" id="scoreMessage">Tandai semua soal untuk skor final</p>
+      <div class="green-gradient p-8 md:p-12 text-[#F5F1E8] text-center">
+        <div class="inline-block px-4 py-1 bg-[#F5F1E8] text-[#1B4332] rounded-full text-xs font-bold mb-4">PENILAIAN PRIBADI</div>
+        <h2 class="serif text-2xl md:text-3xl font-bold mb-2">Cocokkan Jawabanmu</h2>
+        <p class="text-[#74C69D] text-sm mb-6">Tandai setiap soal sebagai <strong>Benar</strong> atau <strong>Salah</strong></p>
+        <div class="inline-block bg-white/10 backdrop-blur rounded-2xl p-6 border-2 border-white/20">
+          <div class="text-6xl md:text-7xl font-black mb-1" id="finalScore">0</div>
+          <div class="text-[#74C69D] text-sm">dari 100 poin</div>
         </div>
+        <p class="mt-4 text-lg font-semibold" id="scoreMessage">Tandai semua soal untuk skor final</p>
       </div>
-      
-      <!-- Review Section -->
       <div class="p-6 md:p-8">
         <div class="mb-4 p-4 bg-[#E8F5E9] border-l-4 border-[#40916C] rounded-r-lg">
-          <p class="text-sm text-[#1B4332]">
-            <strong>📖 Panduan:</strong> Bandingkan jawabanmu dengan kunci di bawah. Klik <span class="font-bold text-[#2D6A4F]">✓ Benar</span> atau <span class="font-bold text-red-700">✗ Salah</span>.
-          </p>
+          <p class="text-sm text-[#1B4332]"><strong>📖 Panduan:</strong> Bandingkan jawabanmu dengan kunci. Klik <span class="font-bold text-[#2D6A4F]">✓ Benar</span> atau <span class="font-bold text-red-700">✗ Salah</span>.</p>
         </div>
-        
         <div id="reviewArea" class="space-y-4"></div>
       </div>
-      
-      <!-- Analisis per Materi -->
       <div class="p-6 md:p-8 border-t border-[#D4C9A8] bg-[#E8DFC8]/30">
         <h3 class="serif text-xl font-bold text-[#1B4332] mb-4">📊 Analisis per Materi</h3>
         <div id="topicBreakdown" class="space-y-3"></div>
       </div>
-      
-      <!-- Actions -->
       <div class="p-6 bg-white border-t border-[#D4C9A8]">
-        <button onclick="location.reload()" class="w-full py-4 green-gradient text-[#F5F1E8] rounded-xl font-bold hover:shadow-lg transition flex items-center justify-center gap-2 text-lg">
-          🔄 Ulangi Latihan (Refresh)
-        </button>
+        <button onclick="location.reload()" class="w-full py-4 green-gradient text-[#F5F1E8] rounded-xl font-bold hover:shadow-lg transition">🔄 Ulangi Latihan (Refresh)</button>
         <p class="text-center text-xs text-[#2D6A4F] mt-3">Atau cukup refresh halaman browser</p>
       </div>
     </div>
@@ -341,313 +153,72 @@
 </div>
 
 <script>
-// Ganti bagian questions array dengan yang ini:
-//QUESTION DATABASE//
+// ============ DATABASE SOAL (35 Soal 100% Sesuai Kisi-Kisi) ============
 const questions = [
-  { id: 1, type: 'pg', topic: 'Dinamika Penjajahan', q: 'Kondisi bangsa Indonesia pada masa penjajahan ditandai dengan...', opts: ['Kemerdekaan berpendapat yang luas', 'Penderitaan, kemiskinan, dan perampasan hak asasi', 'Sistem pendidikan yang merata', 'Kedaulatan penuh di tangan rakyat'], ans: 'Penderitaan, kemiskinan, dan perampasan hak asasi', exp: 'Penjajah mengeksploitasi sumber daya dan merampas hak dasar bangsa Indonesia.' },
-  
-  { id: 2, type: 'pg', topic: 'Dinamika Penjajahan', q: 'Kapan teks Proklamasi Kemerdekaan Indonesia dibacakan?', opts: ['16 Agustus 1945', '17 Agustus 1945', '18 Agustus 1945', '20 Agustus 1945'], ans: '17 Agustus 1945', exp: 'Proklamasi dibacakan oleh Ir. Soekarno pada tanggal 17 Agustus 1945.' },
-  
-  { id: 3, type: 'pg', topic: 'Konsensus Dasar', q: 'Dalam situasi konflik sosial akibat keberagaman, konsensus dasar yang paling relevan untuk menjaga persatuan adalah...', opts: ['UUD 1945', 'NKRI', 'Bhinneka Tunggal Ika', 'Pancasila Sila ke-5'], ans: 'Bhinneka Tunggal Ika', exp: 'Bhinneka Tunggal Ika mengajarkan persatuan dalam keberagaman.' },
-  
-  { id: 4, type: 'pg', topic: 'Sistem Pemerintahan', q: 'Masa Reformasi di Indonesia dimulai sejak tahun...', opts: ['1966', '1998', '2004', '2014'], ans: '1998', exp: 'Reformasi dimulai setelah jatuhnya Orde Baru pada tahun 1998.' },
-  
-  { id: 5, type: 'pg', topic: 'Konsensus Dasar', q: 'Manakah yang BUKAN termasuk 4 konsensus dasar berbangsa dan bernegara?', opts: ['Pancasila', 'UUD 1945', 'Demokrasi Liberal', 'Bhinneka Tunggal Ika'], ans: 'Demokrasi Liberal', exp: '4 Konsensus: Pancasila, UUD 1945, NKRI, Bhinneka Tunggal Ika.' },
-  
-  { id: 6, type: 'pg', topic: 'Konsensus Dasar', q: 'Kapan UUD 1945 ditetapkan sebagai konstitusi negara?', opts: ['17 Agustus 1945', '18 Agustus 1945', '1 Juni 1945', '22 Juni 1945'], ans: '18 Agustus 1945', exp: 'UUD 1945 disahkan oleh PPKI pada tanggal 18 Agustus 1945.' },
-  
-  { id: 7, type: 'pg', topic: 'Konsensus Dasar', q: ' [Bayangkan: Bendera Sang Saka Merah Putih berkibar di atas bola dunia] Berdasarkan gambar tersebut, simbol konsensus NKRI yang ditunjukkan adalah...', opts: ['Bendera Merah Putih sebagai simbol negara', 'Garuda Pancasila sebagai lambang negara', 'Lagu Indonesia Raya sebagai lagu kebangsaan', 'Bahasa Indonesia sebagai bahasa persatuan'], ans: 'Bendera Merah Putih sebagai simbol negara', exp: 'Bendera Merah Putih adalah simbol fisik dari Negara Kesatuan Republik Indonesia (NKRI).' },
-  
-  { id: 8, type: 'pg', topic: 'Konsensus Dasar', q: '📷 [Bayangkan: Lambang Burung Garuda Pancasila dengan perisai di dadanya] Gambar tersebut merupakan bentuk konsensus NKRI yang berupa...', opts: ['Dasar negara', 'Lambang negara', 'Konstitusi negara', 'Semboyan negara'], ans: 'Lambang negara', exp: 'Garuda Pancasila adalah lambang negara Indonesia yang mencerminkan identitas dan kepribadian bangsa.' },
-  
-  { id: 9, type: 'pg', topic: 'Konsensus Dasar', q: 'Pernyataan yang benar tentang hubungan Pancasila dengan negara adalah...', opts: ['Pancasila adalah alat politik partai', 'Pancasila adalah dasar negara dan ideologi bangsa', 'Pancasila bisa diganti setiap presiden', 'Pancasila hanya simbol seremonial'], ans: 'Pancasila adalah dasar negara dan ideologi bangsa', exp: 'Pancasila berkedudukan sebagai dasar negara dan pandangan hidup bangsa.' },
-  
-  { id: 10, type: 'pg', topic: 'Konsensus Dasar', q: '📷 [Bayangkan: Burung Garuda berwarna emas dengan perisai di dada yang berisi simbol-simbol Pancasila] Fungsi utama lambang tersebut adalah sebagai...', opts: ['Hiasan gedung pemerintah', 'Lambang negara dan dasar negara', 'Logo pariwisata', 'Simbol militer'], ans: 'Lambang negara dan dasar negara', exp: 'Garuda Pancasila melambangkan identitas negara dan nilai-nilai dasar negara.' },
-  
-  { id: 11, type: 'pg', topic: 'Konsensus Dasar', q: '📷 [Bayangkan: Pita putih yang dicengkeram kaki burung Garuda dengan tulisan "BHINNEKA TUNGGAL IKA"] Makna semboyan tersebut adalah...', opts: ['Satu suku, satu bahasa', 'Berbeda-beda tetapi tetap satu jua', 'Persamaan agama dan budaya', 'Menolak segala bentuk perbedaan'], ans: 'Berbeda-beda tetapi tetap satu jua', exp: 'Meskipun beragam suku, agama, ras, kita tetap satu bangsa Indonesia.' },
-  
-  { id: 12, type: 'pg', topic: 'Konsensus Dasar', q: '📷 [Bayangkan: Burung Garuda dengan cakar mencengkeram pita putih bertuliskan Bhinneka Tunggal Ika] Semboyan resmi bangsa Indonesia yang tertulis pada pita tersebut adalah...', opts: ['Tut Wuri Handayani', 'Bhinneka Tunggal Ika', 'Merdeka atau Mati', 'Gotong Royong'], ans: 'Bhinneka Tunggal Ika', exp: 'Semboyan resmi negara adalah Bhinneka Tunggal Ika yang berarti "Berbeda-beda tetapi tetap satu jua".' },
-  
-  { id: 13, type: 'pg', topic: 'Sistem Pemerintahan', q: 'Salah satu karakteristik pemerintahan masa Orde Baru adalah...', opts: ['Kebebasan pers yang sangat luas', 'Sentralistik dan dominasi peran ABRI', 'Desentralisasi penuh ke daerah', 'Pemilu multi-partai yang bebas'], ans: 'Sentralistik dan dominasi peran ABRI', exp: 'Orde Baru dikenal dengan sistem pemerintahan sentralistik dan Dwifungsi ABRI.' },
-  
-  { id: 14, type: 'pg', topic: 'Konsensus Dasar', q: '(English) Why did Indonesia choose the Unitary State (NKRI) form?', opts: ['To make the government weaker', 'To strengthen national unity and integrity', 'To follow colonial masters', 'To separate the islands'], ans: 'To strengthen national unity and integrity', exp: 'NKRI dipilih untuk memperkuat persatuan dan kesatuan bangsa yang majemuk.' },
-  
-  { id: 15, type: 'pg', topic: 'Konsensus Dasar', q: 'Pancasila sebagai ideologi terbuka berarti...', opts: ['Bisa diubah sesuka hati', 'Tertutup terhadap pengaruh luar', 'Mampu beradaptasi dengan zaman tanpa kehilangan jati diri', 'Hanya berlaku untuk generasi tua'], ans: 'Mampu beradaptasi dengan zaman tanpa kehilangan jati diri', exp: 'Ideologi terbuka bersifat dinamis namun nilai dasarnya tetap.' },
-  
-  { id: 16, type: 'pg', topic: 'Konsensus Dasar', q: 'Hubungan antara Pancasila dan UUD 1945 adalah...', opts: ['Pancasila sumber dari UUD 1945', 'UUD 1945 lebih tinggi dari Pancasila', 'Keduanya tidak berhubungan', 'Pancasila adalah penjabaran UUD 1945'], ans: 'Pancasila sumber dari UUD 1945', exp: 'Pancasila adalah sumber dari segala sumber hukum, termasuk UUD 1945.' },
-  
-  { id: 17, type: 'pg', topic: 'Konsensus Dasar', q: 'Penekanan nilai Sila Ketiga (Persatuan Indonesia) dalam kehidupan sehari-hari adalah...', opts: ['Mengutamakan kepentingan pribadi', 'Menolak teman yang berbeda agama', 'Relawan bencana alam tanpa memandang suku', 'Ikut tawuran antar desa'], ans: 'Relawan bencana alam tanpa memandang suku', exp: 'Sila 3 mengutamakan persatuan dan kepentingan bersama di atas golongan.' },
-  
-  { id: 18, type: 'pg', topic: 'Sistem Pemerintahan', q: 'Karakteristik sistem politik Masa Reformasi yang membedakannya dari Orde Baru adalah...', opts: ['Kekuasaan presiden seumur hidup', 'Penghormatan HAM dan kebebasan pers', 'Peran militer dalam politik praktis', 'Larangan mendirikan partai politik'], ans: 'Penghormatan HAM dan kebebasan pers', exp: 'Reformasi membawa angin segar bagi HAM dan demokrasi.' },
-  
-  { id: 19, type: 'pg', topic: 'Konsensus Dasar', q: '📷 [Bayangkan: Gedung DPR/MPR dengan arsitektur megah di Jakarta] Lembaga negara yang berwenang mengubah dan menetapkan UUD 1945 berdasarkan gambar gedung tersebut adalah...', opts: ['DPR (Dewan Perwakilan Rakyat)', 'MPR (Majelis Permusyawaratan Rakyat)', 'Presiden', 'MK (Mahkamah Konstitusi)'], ans: 'MPR (Majelis Permusyawaratan Rakyat)', exp: 'Majelis Permusyawaratan Rakyat (MPR) berwenang mengubah dan menetapkan UUD 1945.' },
-  
-  { id: 20, type: 'pg', topic: 'Konsensus Dasar', q: '(English) What is the role of basic consensus in maintaining national harmony?', opts: ['It creates conflict', 'It serves as a common guideline for unity', 'It divides people', 'It is useless'], ans: 'It serves as a common guideline for unity', exp: 'Konsensus dasar menjadi pedoman bersama untuk menjaga keharmonisan.' },
-  
-  { id: 21, type: 'isian', topic: 'Dinamika Penjajahan', q: 'Siapakah tokoh yang membacakan teks Proklamasi Kemerdekaan Indonesia?', ans: ['ir soekarno', 'soekarno', 'bung karno', 'presiden soekarno'], exp: 'Ir. Soekarno didampingi Drs. Moh. Hatta.' },
-  
-  { id: 22, type: 'isian', topic: 'Konsensus Dasar', q: '(English) Mention the date when Pancasila was established as the state foundation (format: 18 Agustus 1945).', ans: ['18 agustus 1945'], exp: 'Pancasila disahkan bersama UUD 1945 pada 18 Agustus 1945.' },
-  
-  { id: 23, type: 'isian', topic: 'Konsensus Dasar', q: 'Berapa jumlah poin utama dalam konsensus dasar berbangsa dan bernegara? (Tulis angka)', ans: ['4', 'empat'], exp: 'Ada 4 konsensus: Pancasila, UUD 1945, NKRI, Bhinneka Tunggal Ika.' },
-  
-  { id: 24, type: 'isian', topic: 'Konsensus Dasar', q: 'Sebutkan nama lambang negara Indonesia!', ans: ['garuda pancasila', 'garuda'], exp: 'Lambang negara Indonesia adalah Garuda Pancasila.' },
-  
-  { id: 25, type: 'isian', topic: 'Konsensus Dasar', q: 'Tuliskan bunyi semboyan bangsa Indonesia!', ans: ['bhinneka tunggal ika'], exp: 'Bhinneka Tunggal Ika.' },
-  
-  { id: 26, type: 'isian', topic: 'Sistem Pemerintahan', q: 'Tahun berapa Masa Reformasi di Indonesia dimulai?', ans: ['1998'], exp: 'Reformasi dimulai tahun 1998.' },
-  
-  { id: 27, type: 'isian', topic: 'Konsensus Dasar', q: 'Tuliskan bunyi Sila Ketiga Pancasila!', ans: ['persatuan indonesia'], exp: 'Sila ke-3: Persatuan Indonesia.' },
-  
-  { id: 28, type: 'isian', topic: 'Konsensus Dasar', q: 'UUD 1945 berkedudukan sebagai ... dasar negara.', ans: ['hukum', 'konstitusi'], exp: 'UUD 1945 adalah hukum dasar tertulis (konstitusi).' },
-  
-  { id: 29, type: 'isian', topic: 'Konsensus Dasar', q: 'Apa kepanjangan dari NKRI?', ans: ['negara kesatuan republik indonesia'], exp: 'Negara Kesatuan Republik Indonesia.' },
-  
-  { id: 30, type: 'isian', topic: 'Konsensus Dasar', q: 'Pancasila digali dari sumber nilai bangsa Indonesia yaitu ... dan kepribadian bangsa.', ans: ['budaya', 'kebudayaan'], exp: 'Pancasila bersumber dari budaya dan kepribadian bangsa.' },
-  
-  { id: 31, type: 'esai', topic: 'Dinamika Penjajahan', q: 'Jelaskan kondisi kehidupan dan penderitaan bangsa Indonesia pada masa penjajahan!', ans: 'Rakyat miskin, bodoh, hak asasi dirampas, kerja paksa (romusha), pajak tinggi, diskriminasi.', exp: 'Fokus pada aspek ekonomi, sosial, dan HAM.' },
-  
-  { id: 32, type: 'esai', topic: 'Konsensus Dasar', q: 'Sebutkan dan jelaskan singkat 4 konsensus dasar berbangsa dan bernegara!', ans: '1. Pancasila (Dasar Negara), 2. UUD 1945 (Konstitusi), 3. NKRI (Bentuk Negara), 4. Bhinneka Tunggal Ika (Semboyan).', exp: 'Harus menyebutkan keempatnya.' },
-  
-  { id: 33, type: 'esai', topic: 'Konsensus Dasar', q: 'Jelaskan hubungan kedudukan antara Pancasila dan UUD 1945!', ans: 'Pancasila adalah sumber dari segala sumber hukum termasuk UUD 1945. UUD 1945 adalah penjabaran nilai-nilai Pancasila dalam bentuk hukum dasar tertulis.', exp: 'Hubungan hierarkis: Pancasila di atas UUD 1945.' },
-  
-  { id: 34, type: 'esai', topic: 'Konsensus Dasar', q: '(English) Explain why Bhinneka Tunggal Ika is important for Indonesia!', ans: 'Because Indonesia has many diversities (ethnic, religion, language, etc). The motto unites us despite differences and maintains national integrity.', exp: 'Menjelaskan fungsi pemersatu dalam keberagaman.' },
-  
-  { id: 35, type: 'esai', topic: 'Sistem Pemerintahan', q: 'Bandingkan karakteristik sistem politik Masa Orde Baru dan Masa Reformasi!', ans: 'Orba: Sentralistik, otoriter, dwifungsi ABRI, pembatasan pers. Reformasi: Demokratis, desentralisasi (otda), supremasi hukum, HAM dihormati, kebebasan pers.', exp: 'Perbedaan mendasar pada kebebasan dan struktur kekuasaan.' }
+  {id:1,type:'pg',topic:'Dinamika Penjajahan',q:'Kondisi bangsa Indonesia pada masa penjajahan ditandai dengan...',opts:['Kemerdekaan berpendapat yang luas','Penderitaan, kemiskinan, dan perampasan hak asasi','Sistem pendidikan yang merata','Kedaulatan penuh di tangan rakyat'],ans:'Penderitaan, kemiskinan, dan perampasan hak asasi',exp:'Penjajah mengeksploitasi sumber daya dan merampas hak dasar bangsa.'},
+  {id:2,type:'pg',topic:'Dinamika Penjajahan',q:'Kapan teks Proklamasi Kemerdekaan Indonesia dibacakan?',opts:['16 Agustus 1945','17 Agustus 1945','18 Agustus 1945','20 Agustus 1945'],ans:'17 Agustus 1945',exp:'Proklamasi dibacakan Ir. Soekarno pada 17 Agustus 1945.'},
+  {id:3,type:'pg',topic:'Konsensus Dasar',q:'Disajikan teks tentang konflik sosial akibat keberagaman. Konsensus dasar yang paling relevan untuk menjaga persatuan adalah...',opts:['UUD 1945','NKRI','Bhinneka Tunggal Ika','Pancasila Sila ke-5'],ans:'Bhinneka Tunggal Ika',exp:'Bhinneka Tunggal Ika mengajarkan persatuan dalam keberagaman.'},
+  {id:4,type:'pg',topic:'Sistem Pemerintahan',q:'Masa Reformasi di Indonesia dimulai sejak tahun...',opts:['1966','1998','2004','2014'],ans:'1998',exp:'Reformasi dimulai 1998 setelah mundurnya Presiden Soeharto.'},
+  {id:5,type:'pg',topic:'Konsensus Dasar',q:'Manakah yang BUKAN termasuk 4 konsensus dasar berbangsa dan bernegara?',opts:['Pancasila','UUD 1945','Demokrasi Liberal','Bhinneka Tunggal Ika'],ans:'Demokrasi Liberal',exp:'4 Konsensus: Pancasila, UUD 1945, NKRI, Bhinneka Tunggal Ika.'},
+  {id:6,type:'pg',topic:'Konsensus Dasar',q:'Kapan UUD 1945 ditetapkan sebagai konstitusi negara?',opts:['17 Agustus 1945','18 Agustus 1945','1 Juni 1945','22 Juni 1945'],ans:'18 Agustus 1945',exp:'UUD 1945 disahkan PPKI pada 18 Agustus 1945.'},
+  {id:7,type:'pg',topic:'Konsensus Dasar',q:'📷 [Bayangkan: Bendera Sang Saka Merah Putih berkibar di atas bola dunia]. Berdasarkan gambar, simbol konsensus NKRI yang ditunjukkan adalah...',opts:['Bendera Merah Putih sebagai simbol negara','Garuda Pancasila sebagai lambang negara','Lagu Indonesia Raya sebagai lagu kebangsaan','Bahasa Indonesia sebagai bahasa persatuan'],ans:'Bendera Merah Putih sebagai simbol negara',exp:'Bendera Merah Putih adalah simbol fisik NKRI.'},
+  {id:8,type:'pg',topic:'Konsensus Dasar',q:'📷 [Bayangkan: Lambang Burung Garuda Pancasila dengan perisai di dada]. Gambar tersebut merupakan bentuk konsensus NKRI yang berupa...',opts:['Dasar negara','Lambang negara','Konstitusi negara','Semboyan negara'],ans:'Lambang negara',exp:'Garuda Pancasila adalah lambang negara Indonesia.'},
+  {id:9,type:'pg',topic:'Konsensus Dasar',q:'Pernyataan yang benar tentang hubungan Pancasila dengan negara adalah...',opts:['Pancasila adalah alat politik partai','Pancasila adalah dasar negara dan ideologi bangsa','Pancasila bisa diganti setiap presiden','Pancasila hanya simbol seremonial'],ans:'Pancasila adalah dasar negara dan ideologi bangsa',exp:'Pancasila berkedudukan sebagai dasar negara dan pandangan hidup bangsa.'},
+  {id:10,type:'pg',topic:'Konsensus Dasar',q:'📷 [Bayangkan: Burung Garuda emas dengan perisai berisi simbol sila Pancasila]. Fungsi utama lambang tersebut adalah sebagai...',opts:['Hiasan gedung pemerintah','Lambang negara dan dasar negara','Logo pariwisata','Simbol militer'],ans:'Lambang negara dan dasar negara',exp:'Garuda Pancasila melambangkan identitas dan nilai dasar negara.'},
+  {id:11,type:'pg',topic:'Konsensus Dasar',q:'📷 [Bayangkan: Pita putih dicengkeram kaki Garuda bertuliskan "BHINNEKA TUNGGAL IKA"]. Makna semboyan tersebut adalah...',opts:['Satu suku, satu bahasa','Berbeda-beda tetapi tetap satu jua','Persamaan agama dan budaya','Menolak segala bentuk perbedaan'],ans:'Berbeda-beda tetapi tetap satu jua',exp:'Meskipun beragam, kita tetap satu bangsa Indonesia.'},
+  {id:12,type:'pg',topic:'Konsensus Dasar',q:'📷 [Bayangkan: Garuda mencengkeram pita bertuliskan Bhinneka Tunggal Ika]. Semboyan resmi bangsa Indonesia pada pita tersebut adalah...',opts:['Tut Wuri Handayani','Bhinneka Tunggal Ika','Merdeka atau Mati','Gotong Royong'],ans:'Bhinneka Tunggal Ika',exp:'Semboyan resmi negara adalah Bhinneka Tunggal Ika.'},
+  {id:13,type:'pg',topic:'Sistem Pemerintahan',q:'Salah satu karakteristik pemerintahan masa Orde Baru adalah...',opts:['Kebebasan pers yang sangat luas','Sentralistik dan dominasi peran ABRI','Desentralisasi penuh ke daerah','Pemilu multi-partai yang bebas'],ans:'Sentralistik dan dominasi peran ABRI',exp:'Orde Baru dikenal sentralistik dan Dwifungsi ABRI.'},
+  {id:14,type:'pg',topic:'Konsensus Dasar',q:'(English) Why did Indonesia choose the Unitary State (NKRI) form?',opts:['To make the government weaker','To strengthen national unity and integrity','To follow colonial masters','To separate the islands'],ans:'To strengthen national unity and integrity',exp:'NKRI dipilih untuk memperkuat persatuan bangsa yang majemuk.'},
+  {id:15,type:'pg',topic:'Konsensus Dasar',q:'Pancasila sebagai ideologi terbuka berarti...',opts:['Bisa diubah sesuka hati','Tertutup terhadap pengaruh luar','Mampu beradaptasi dengan zaman tanpa kehilangan jati diri','Hanya berlaku untuk generasi tua'],ans:'Mampu beradaptasi dengan zaman tanpa kehilangan jati diri',exp:'Ideologi terbuka bersifat dinamis namun nilai dasarnya tetap.'},
+  {id:16,type:'pg',topic:'Konsensus Dasar',q:'Hubungan antara Pancasila dan UUD 1945 adalah...',opts:['Pancasila sumber dari UUD 1945','UUD 1945 lebih tinggi dari Pancasila','Keduanya tidak berhubungan','Pancasila adalah penjabaran UUD 1945'],ans:'Pancasila sumber dari UUD 1945',exp:'Pancasila adalah sumber dari segala sumber hukum, termasuk UUD 1945.'},
+  {id:17,type:'pg',topic:'Konsensus Dasar',q:'Penekanan nilai Sila Ketiga (Persatuan Indonesia) dalam kehidupan sehari-hari adalah...',opts:['Mengutamakan kepentingan pribadi','Menolak teman yang berbeda agama','Relawan bencana alam tanpa memandang suku','Ikut tawuran antar desa'],ans:'Relawan bencana alam tanpa memandang suku',exp:'Sila 3 mengutamakan persatuan dan kepentingan bersama.'},
+  {id:18,type:'pg',topic:'Sistem Pemerintahan',q:'Karakteristik sistem politik Masa Reformasi yang membedakannya dari Orde Baru adalah...',opts:['Kekuasaan presiden seumur hidup','Penghormatan HAM dan kebebasan pers','Peran militer dalam politik praktis','Larangan mendirikan partai politik'],ans:'Penghormatan HAM dan kebebasan pers',exp:'Reformasi membawa angin segar bagi HAM dan demokrasi.'},
+  {id:19,type:'pg',topic:'Konsensus Dasar',q:'📷 [Bayangkan: Gedung DPR/MPR dengan arsitektur megah di Jakarta]. Lembaga yang berwenang mengubah dan menetapkan UUD 1945 berdasarkan gambar adalah...',opts:['DPR','MPR','Presiden','MK'],ans:'MPR',exp:'MPR berwenang mengubah dan menetapkan UUD 1945.'},
+  {id:20,type:'pg',topic:'Konsensus Dasar',q:'(English) What is the role of basic consensus in maintaining national harmony?',opts:['It creates conflict','It serves as a common guideline for unity','It divides people','It is useless'],ans:'It serves as a common guideline for unity',exp:'Konsensus dasar menjadi pedoman bersama untuk menjaga keharmonisan.'},
+  {id:21,type:'isian',topic:'Dinamika Penjajahan',q:'Siapakah tokoh yang membacakan teks Proklamasi Kemerdekaan Indonesia?',ans:['ir soekarno','soekarno','bung karno','presiden soekarno'],exp:'Ir. Soekarno didampingi Drs. Moh. Hatta.'},
+  {id:22,type:'isian',topic:'Konsensus Dasar',q:'(English) Mention the date when Pancasila was established as the state foundation (format: 18 Agustus 1945).',ans:['18 agustus 1945'],exp:'Pancasila disahkan bersama UUD 1945 pada 18 Agustus 1945.'},
+  {id:23,type:'isian',topic:'Konsensus Dasar',q:'Berapa jumlah poin utama dalam konsensus dasar berbangsa dan bernegara? (Tulis angka)',ans:['4','empat'],exp:'Ada 4 konsensus: Pancasila, UUD 1945, NKRI, Bhinneka Tunggal Ika.'},
+  {id:24,type:'isian',topic:'Konsensus Dasar',q:'Sebutkan nama lambang negara Indonesia!',ans:['garuda pancasila','garuda'],exp:'Lambang negara Indonesia adalah Garuda Pancasila.'},
+  {id:25,type:'isian',topic:'Konsensus Dasar',q:'Tuliskan bunyi semboyan bangsa Indonesia!',ans:['bhinneka tunggal ika'],exp:'Bhinneka Tunggal Ika.'},
+  {id:26,type:'isian',topic:'Sistem Pemerintahan',q:'Tahun berapa Masa Reformasi di Indonesia dimulai?',ans:['1998'],exp:'Reformasi dimulai tahun 1998.'},
+  {id:27,type:'isian',topic:'Konsensus Dasar',q:'Tuliskan bunyi Sila Ketiga Pancasila!',ans:['persatuan indonesia'],exp:'Sila ke-3: Persatuan Indonesia.'},
+  {id:28,type:'isian',topic:'Konsensus Dasar',q:'UUD 1945 berkedudukan sebagai ... dasar negara.',ans:['hukum','konstitusi'],exp:'UUD 1945 adalah hukum dasar tertulis (konstitusi).'},
+  {id:29,type:'isian',topic:'Konsensus Dasar',q:'Apa kepanjangan dari NKRI?',ans:['negara kesatuan republik indonesia'],exp:'Negara Kesatuan Republik Indonesia.'},
+  {id:30,type:'isian',topic:'Konsensus Dasar',q:'Pancasila digali dari sumber nilai bangsa Indonesia yaitu ... dan kepribadian bangsa.',ans:['budaya','kebudayaan'],exp:'Pancasila bersumber dari budaya dan kepribadian bangsa.'},
+  {id:31,type:'esai',topic:'Dinamika Penjajahan',q:'Jelaskan kondisi kehidupan dan penderitaan bangsa Indonesia pada masa penjajahan!',ans:'Rakyat miskin, bodoh, hak asasi dirampas, kerja paksa (romusha), pajak tinggi, diskriminasi.',exp:'Fokus pada aspek ekonomi, sosial, dan HAM.'},
+  {id:32,type:'esai',topic:'Konsensus Dasar',q:'Sebutkan dan jelaskan singkat 4 konsensus dasar berbangsa dan bernegara!',ans:'1. Pancasila (Dasar Negara), 2. UUD 1945 (Konstitusi), 3. NKRI (Bentuk Negara), 4. Bhinneka Tunggal Ika (Semboyan).',exp:'Harus menyebutkan keempatnya.'},
+  {id:33,type:'esai',topic:'Konsensus Dasar',q:'Jelaskan hubungan kedudukan antara Pancasila dan UUD 1945!',ans:'Pancasila adalah sumber dari segala sumber hukum termasuk UUD 1945. UUD 1945 adalah penjabaran nilai-nilai Pancasila dalam bentuk hukum dasar tertulis.',exp:'Hubungan hierarkis: Pancasila di atas UUD 1945.'},
+  {id:34,type:'esai',topic:'Konsensus Dasar',q:'(English) Explain why Bhinneka Tunggal Ika is important for Indonesia!',ans:'Because Indonesia has many diversities (ethnic, religion, language, etc). The motto unites us despite differences and maintains national integrity.',exp:'Menjelaskan fungsi pemersatu dalam keberagaman.'},
+  {id:35,type:'esai',topic:'Sistem Pemerintahan',q:'Bandingkan karakteristik sistem politik Masa Orde Baru dan Masa Reformasi!',ans:'Orba: Sentralistik, otoriter, dwifungsi ABRI, pembatasan pers. Reformasi: Demokratis, desentralisasi (otda), supremasi hukum, HAM dihormati, kebebasan pers.',exp:'Perbedaan mendasar pada kebebasan dan struktur kekuasaan.'}
 ];
 
 // ============ STATE ============
-let currentIdx = 0;
-let answers = {};
-let selfMarks = {};
-
+let currentIdx = 0, answers = {}, selfMarks = {};
 document.getElementById('totalNum').textContent = questions.length;
 
-function startQuiz() {
-  document.getElementById('startScreen').classList.add('hidden');
-  document.getElementById('quizScreen').classList.remove('hidden');
-  render();
-  renderGrid();
-}
-
-function render() {
-  const q = questions[currentIdx];
-  const area = document.getElementById('questionContent');
-  
-  document.getElementById('currentNum').textContent = currentIdx + 1;
-  document.getElementById('topicBadge').textContent = q.topic;
-  document.getElementById('typeBadge').textContent = q.type === 'pg' ? 'Pilihan Ganda' : q.type === 'isian' ? 'Isian Singkat' : 'Uraian';
-  
-  const pct = ((currentIdx + 1) / questions.length) * 100;
-  document.getElementById('progressBar').style.width = `${pct}%`;
-  
-  document.getElementById('prevBtn').disabled = currentIdx === 0;
-  if (currentIdx === questions.length - 1) {
-    document.getElementById('nextBtn').classList.add('hidden');
-    document.getElementById('submitBtn').classList.remove('hidden');
-  } else {
-    document.getElementById('nextBtn').classList.remove('hidden');
-    document.getElementById('submitBtn').classList.add('hidden');
-  }
-  
-  let html = `<div class="fade-in">
-    <h2 class="text-xl md:text-2xl font-bold text-[#1B4332] mb-6 leading-snug">${currentIdx + 1}. ${q.q}</h2>`;
-
-  if (q.type === 'pg') {
-    html += `<div class="grid gap-3">`;
-    q.opts.forEach((opt, i) => {
-      const selected = answers[q.id] === opt ? 'selected' : '';
-      html += `
-        <div class="option-card p-4 rounded-xl flex items-center gap-3 ${selected}" onclick="selectOption(${q.id}, '${opt.replace(/'/g, "\\'")}', this)">
-          <div class="w-8 h-8 rounded-full border-2 border-[#D4C9A8] flex items-center justify-center font-bold text-[#2D6A4F] text-sm shrink-0">${String.fromCharCode(65 + i)}</div>
-          <span class="text-[#1B4332]">${opt}</span>
-        </div>`;
-    });
-    html += `</div>`;
-  } else {
-    const val = answers[q.id] || '';
-    const placeholder = q.type === 'esai' ? 'Tuliskan jawaban uraian Anda di sini...' : 'Ketik jawaban singkat...';
-    const rows = q.type === 'esai' ? 6 : 1;
-    
-    html += `
-      <textarea 
-        oninput="answers[${q.id}] = this.value; updateGrid();" 
-        rows="${rows}" 
-        class="w-full p-4 border-2 border-[#D4C9A8] rounded-xl focus:border-[#40916C] focus:ring-4 focus:ring-[#74C69D]/30 outline-none transition text-lg text-[#1B4332] bg-white" 
-        placeholder="${placeholder}">${val}</textarea>
-      ${q.type === 'isian' ? '<p class="text-xs text-[#2D6A4F] mt-2">*Jawaban tidak peka huruf besar/kecil.</p>' : ''}
-    `;
-  }
-  html += `</div>`;
-  area.innerHTML = html;
-}
-
-function selectOption(qId, value, el) {
-  answers[qId] = value;
-  document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  updateGrid();
-}
-
-function changeQ(dir) {
-  currentIdx += dir;
-  if (currentIdx < 0) currentIdx = 0;
-  if (currentIdx >= questions.length) currentIdx = questions.length - 1;
-  render();
-  renderGrid();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function renderGrid() {
-  const grid = document.getElementById('qGrid');
-  grid.innerHTML = '';
-  questions.forEach((q, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'q-btn w-full aspect-square rounded-lg border-2 border-[#D4C9A8] font-bold text-sm flex items-center justify-center bg-white text-[#1B4332]';
-    btn.textContent = i + 1;
-    if (answers[q.id] !== undefined && answers[q.id] !== '') btn.classList.add('answered');
-    if (i === currentIdx) btn.classList.add('current');
-    btn.onclick = () => { currentIdx = i; render(); renderGrid(); };
-    grid.appendChild(btn);
-  });
-  const answered = questions.filter(q => answers[q.id] !== undefined && answers[q.id] !== '').length;
-  document.getElementById('answeredCount').textContent = answered;
-}
-
-function updateGrid() { renderGrid(); }
-
-function submitQuiz() {
-  const unanswered = questions.filter(q => answers[q.id] === undefined || answers[q.id] === '').length;
-  if (unanswered > 0) {
-    if (!confirm(`Masih ada ${unanswered} soal belum dijawab. Tetap lanjut melihat kunci jawaban?`)) return;
-  } else {
-    if (!confirm('Lihat kunci jawaban dan mulai penilaian pribadi?')) return;
-  }
-  
-  document.getElementById('quizScreen').classList.add('hidden');
-  document.getElementById('resultScreen').classList.remove('hidden');
-  renderReview();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function renderReview() {
-  const area = document.getElementById('reviewArea');
-  area.innerHTML = '';
-  
-  questions.forEach((q, idx) => {
-    const userAns = answers[q.id] || '<em class="text-gray-400">Tidak dijawab</em>';
-    const keyAns = Array.isArray(q.ans) ? q.ans[0] : q.ans;
-    
-    const card = document.createElement('div');
-    card.className = 'border-2 border-[#D4C9A8] rounded-2xl p-5 bg-white';
-    card.innerHTML = `
-      <div class="flex items-start justify-between gap-3 mb-3 flex-wrap">
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="px-3 py-1 bg-[#1B4332] text-[#F5F1E8] text-xs font-bold rounded-full">Soal ${idx + 1}</span>
-          <span class="px-3 py-1 bg-[#D4C9A8] text-[#1B4332] text-xs font-bold rounded-full uppercase">${q.topic}</span>
-          <span class="px-3 py-1 bg-[#74C69D] text-[#1B4332] text-xs font-bold rounded-full uppercase">${q.type === 'pg' ? 'PG' : q.type === 'isian' ? 'Isian' : 'Esai'}</span>
-        </div>
-      </div>
-      
-      <p class="text-[#1B4332] font-semibold mb-3 leading-relaxed">${q.q}</p>
-      
-      <div class="grid md:grid-cols-2 gap-3 mb-3">
-        <div class="p-3 bg-[#E8F5E9] border-l-4 border-[#40916C] rounded-r-lg">
-          <div class="text-xs text-[#2D6A4F] font-bold mb-1">JAWABAN ANDA</div>
-          <div class="text-[#1B4332] text-sm">${userAns}</div>
-        </div>
-        <div class="p-3 bg-[#FFF8E1] border-l-4 border-[#D4AF37] rounded-r-lg">
-          <div class="text-xs text-[#8B6914] font-bold mb-1">🔑 KUNCI JAWABAN</div>
-          <div class="text-[#1B4332] text-sm font-semibold">${keyAns}</div>
-        </div>
-      </div>
-      
-      <div class="p-3 bg-[#F5F1E8] border-l-4 border-[#2D6A4F] rounded-r-lg mb-4">
-        <div class="text-xs text-[#2D6A4F] font-bold mb-1"> PEMBAHASAN</div>
-        <div class="text-[#1B4332] text-sm">${q.exp}</div>
-      </div>
-      
-      <div class="flex gap-2">
-        <button onclick="markSelf(${q.id}, 'correct', this)" class="self-btn flex-1 py-3 bg-white border-2 border-[#40916C] text-[#2D6A4F] rounded-xl font-bold hover:bg-[#E8F5E9] transition flex items-center justify-center gap-2">
-          ✓ Benar
-        </button>
-        <button onclick="markSelf(${q.id}, 'wrong', this)" class="self-btn flex-1 py-3 bg-white border-2 border-[#B91C1C] text-[#B91C1C] rounded-xl font-bold hover:bg-red-50 transition flex items-center justify-center gap-2">
-          ✗ Salah
-        </button>
-      </div>
-    `;
-    area.appendChild(card);
-  });
-  
-  updateScore();
-}
-
-function markSelf(qId, mark, btn) {
-  selfMarks[qId] = mark;
-  const parent = btn.parentElement;
-  parent.querySelectorAll('.self-btn').forEach(b => {
-    b.classList.remove('marked-correct', 'marked-wrong');
-  });
-  btn.classList.add(mark === 'correct' ? 'marked-correct' : 'marked-wrong');
-  updateScore();
-}
-
-function updateScore() {
-  const total = questions.length;
-  const marked = Object.keys(selfMarks).length;
-  const correct = Object.values(selfMarks).filter(v => v === 'correct').length;
-  
-  const score = marked > 0 ? Math.round((correct / marked) * 100) : 0;
-  document.getElementById('finalScore').textContent = score;
-  
-  let msg = '';
-  if (marked < total) {
-    msg = `Tandai semua soal untuk skor final (${marked}/${total} sudah dinilai)`;
-  } else if (score >= 90) {
-    msg = '🌟 Luar Biasa! Pemahamanmu sangat baik!';
-  } else if (score >= 75) {
-    msg = '👍 Bagus! Terus tingkatkan!';
-  } else if (score >= 60) {
-    msg = '💪 Cukup baik, pelajari lagi materi yang salah.';
-  } else {
-    msg = '📚 Perlu belajar lebih giat. Semangat!';
-  }
-  document.getElementById('scoreMessage').textContent = msg;
-  
-  renderBreakdown();
-}
-
-function renderBreakdown() {
-  const topics = {};
-  questions.forEach(q => {
-    if (!topics[q.topic]) topics[q.topic] = { total: 0, correct: 0, marked: 0 };
-    topics[q.topic].total++;
-    if (selfMarks[q.id] !== undefined) {
-      topics[q.topic].marked++;
-      if (selfMarks[q.id] === 'correct') topics[q.topic].correct++;
-    }
-  });
-  
-  const area = document.getElementById('topicBreakdown');
-  area.innerHTML = '';
-  
-  Object.entries(topics).forEach(([topic, data]) => {
-    const pct = data.marked > 0 ? Math.round((data.correct / data.marked) * 100) : 0;
-    const barWidth = data.marked > 0 ? (data.correct / data.marked) * 100 : 0;
-    
-    const row = document.createElement('div');
-    row.className = 'bg-white p-4 rounded-xl border border-[#D4C9A8]';
-    row.innerHTML = `
-      <div class="flex justify-between items-center mb-2">
-        <div class="font-bold text-[#1B4332]">${topic}</div>
-        <div class="text-sm font-semibold text-[#2D6A4F]">${data.correct}/${data.marked} (${pct}%)</div>
-      </div>
-      <div class="h-2 bg-[#D4C9A8] rounded-full overflow-hidden">
-        <div class="h-full progress-fill transition-all duration-500" style="width: ${barWidth}%"></div>
-      </div>
-    `;
-    area.appendChild(row);
-  });
-}
+function startQuiz(){document.getElementById('startScreen').classList.add('hidden');document.getElementById('quizScreen').classList.remove('hidden');render();renderGrid();}
+function render(){
+  const q=questions[currentIdx],area=document.getElementById('questionContent');
+  document.getElementById('currentNum').textContent=currentIdx+1;
+  document.getElementById('topicBadge').textContent=q.topic;
+  document.getElementById('typeBadge').textContent=q.type==='pg'?'Pilihan Ganda':q.type==='isian'?'Isian Singkat':'Uraian';
+  document.getElementById('progressBar').style.width=`${((currentIdx+1)/questions.length)*100}%`;
+  document.getElementById('prevBtn').disabled=currentIdx===0;
+  if(currentIdx===questions.length-1){document.getElementById('nextBtn').classList.add('hidden');document.getElementById('submitBtn').classList.remove('hidden');}
+  else{document.getElementById('nextBtn').classList.remove('hidden');document.getElementById('submitBtn').classList.add('hidden');}
+  let html=`<div class="fade-in"><h2 class="text-xl md:text-2xl font-bold text-[#1B4332] mb-6">${currentIdx+1}. ${q.q}</h2>`;
+  if(q.type==='pg'){html+=`<div class="grid gap-3">`;q.opts.forEach((opt,i)=>{const selected=answers[q.id]===opt?'selected':'';html+=`<div class="option-card p-4 rounded-xl flex items-center gap-3 ${selected}" onclick="selectOption(${q.id},'${opt.replace(/'/g,"\\'")}',this)"><div class="w-8 h-8 rounded-full border-2 border-[#D4C9A8] flex items-center justify-center font-bold text-[#2D6A4F] text-sm">${String.fromCharCode(65+i)}</div><span class="text-[#1B4332]">${opt}</span></div>`;});html+=`</div>`;}
+  else{const val=answers[q.id]||'',placeholder=q.type==='esai'?'Tuliskan jawaban uraian Anda...':'Ketik jawaban singkat...',rows=q.type==='esai'?6:1;html+=`<textarea oninput="answers[${q.id}]=this.value;updateGrid();" rows="${rows}" class="w-full p-4 border-2 border-[#D4C9A8] rounded-xl focus:border-[#40916C] focus:ring-4 focus:ring-[#74C69D]/30 outline-none transition text-lg text-[#1B4332] bg-white" placeholder="${placeholder}">${val}</textarea>${q.type==='isian'?'<p class="text-xs text-[#2D6A4F] mt-2">*Jawaban tidak peka huruf besar/kecil.</p>':''}`;}
+  html+=`</div>`;area.innerHTML=html;}
+function selectOption(qId,value,el){answers[qId]=value;document.querySelectorAll('.option-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');updateGrid();}
+function changeQ(dir){currentIdx+=dir;if(currentIdx<0)currentIdx=0;if(currentIdx>=questions.length)currentIdx=questions.length-1;render();renderGrid();window.scrollTo({top:0,behavior:'smooth'});}
+function renderGrid(){const grid=document.getElementById('qGrid');grid.innerHTML='';questions.forEach((q,i)=>{const btn=document.createElement('button');btn.className=`q-btn w-full aspect-square rounded-lg border-2 border-[#D4C9A8] font-bold text-sm flex items-center justify-center bg-white text-[#1B4332] ${answers[q.id]!==undefined&&answers[q.id]!==''?'answered':''} ${i===currentIdx?'current':''}`;btn.textContent=i+1;btn.onclick=()=>{currentIdx=i;render();renderGrid();};grid.appendChild(btn);});document.getElementById('answeredCount').textContent=questions.filter(q=>answers[q.id]!==undefined&&answers[q.id]!=='').length;}
+function updateGrid(){renderGrid();}
+function submitQuiz(){const unanswered=questions.filter(q=>answers[q.id]===undefined||answers[q.id]==='').length;if(unanswered>0&&!confirm(`Masih ada ${unanswered} soal belum dijawab. Tetap lanjut?`))return;if(!confirm('Lihat kunci jawaban dan mulai penilaian pribadi?'))return;document.getElementById('quizScreen').classList.add('hidden');document.getElementById('resultScreen').classList.remove('hidden');renderReview();window.scrollTo({top:0,behavior:'smooth'});}
+function renderReview(){const area=document.getElementById('reviewArea');area.innerHTML='';questions.forEach((q,idx)=>{const userAns=answers[q.id]||'<em class="text-gray-400">Tidak dijawab</em>',keyAns=Array.isArray(q.ans)?q.ans[0]:q.ans;const card=document.createElement('div');card.className='border-2 border-[#D4C9A8] rounded-2xl p-5 bg-white';card.innerHTML=`<div class="flex items-start justify-between gap-3 mb-3 flex-wrap"><div class="flex items-center gap-2 flex-wrap"><span class="px-3 py-1 bg-[#1B4332] text-[#F5F1E8] text-xs font-bold rounded-full">Soal ${idx+1}</span><span class="px-3 py-1 bg-[#D4C9A8] text-[#1B4332] text-xs font-bold rounded-full uppercase">${q.topic}</span><span class="px-3 py-1 bg-[#74C69D] text-[#1B4332] text-xs font-bold rounded-full uppercase">${q.type==='pg'?'PG':q.type==='isian'?'Isian':'Esai'}</span></div></div><p class="text-[#1B4332] font-semibold mb-3">${q.q}</p><div class="grid md:grid-cols-2 gap-3 mb-3"><div class="p-3 bg-[#E8F5E9] border-l-4 border-[#40916C] rounded-r-lg"><div class="text-xs text-[#2D6A4F] font-bold mb-1">JAWABAN ANDA</div><div class="text-[#1B4332] text-sm">${userAns}</div></div><div class="p-3 bg-[#FFF8E1] border-l-4 border-[#D4AF37] rounded-r-lg"><div class="text-xs text-[#8B6914] font-bold mb-1">🔑 KUNCI JAWABAN</div><div class="text-[#1B4332] text-sm font-semibold">${keyAns}</div></div></div><div class="p-3 bg-[#F5F1E8] border-l-4 border-[#2D6A4F] rounded-r-lg mb-4"><div class="text-xs text-[#2D6A4F] font-bold mb-1">💡 PEMBAHASAN</div><div class="text-[#1B4332] text-sm">${q.exp}</div></div><div class="flex gap-2"><button onclick="markSelf(${q.id},'correct',this)" class="self-btn flex-1 py-3 bg-white border-2 border-[#40916C] text-[#2D6A4F] rounded-xl font-bold hover:bg-[#E8F5E9] transition">✓ Benar</button><button onclick="markSelf(${q.id},'wrong',this)" class="self-btn flex-1 py-3 bg-white border-2 border-[#B91C1C] text-[#B91C1C] rounded-xl font-bold hover:bg-red-50 transition">✗ Salah</button></div>`;area.appendChild(card);});updateScore();}
+function markSelf(qId,mark,btn){selfMarks[qId]=mark;const parent=btn.parentElement;parent.querySelectorAll('.self-btn').forEach(b=>b.classList.remove('marked-correct','marked-wrong'));btn.classList.add(mark==='correct'?'marked-correct':'marked-wrong');updateScore();}
+function updateScore(){const marked=Object.keys(selfMarks).length,correct=Object.values(selfMarks).filter(v=>v==='correct').length,score=marked>0?Math.round((correct/marked)*100):0;document.getElementById('finalScore').textContent=score;let msg='';if(marked<questions.length)msg=`Tandai semua soal untuk skor final (${marked}/${questions.length} sudah dinilai)`;else if(score>=90)msg='🌟 Luar Biasa! Pemahamanmu sangat baik!';else if(score>=75)msg='👍 Bagus! Terus tingkatkan!';else if(score>=60)msg='💪 Cukup baik, pelajari lagi materi yang salah.';else msg='📚 Perlu belajar lebih giat. Semangat!';document.getElementById('scoreMessage').textContent=msg;renderBreakdown();}
+function renderBreakdown(){const topics={};questions.forEach(q=>{if(!topics[q.topic])topics[q.topic]={total:0,correct:0,marked:0};topics[q.topic].total++;if(selfMarks[q.id]!==undefined){topics[q.topic].marked++;if(selfMarks[q.id]==='correct')topics[q.topic].correct++;}});const area=document.getElementById('topicBreakdown');area.innerHTML='';Object.entries(topics).forEach(([topic,data])=>{const pct=data.marked>0?Math.round((data.correct/data.marked)*100):0,barWidth=data.marked>0?(data.correct/data.marked)*100:0;const row=document.createElement('div');row.className='bg-white p-4 rounded-xl border border-[#D4C9A8]';row.innerHTML=`<div class="flex justify-between items-center mb-2"><div class="font-bold text-[#1B4332]">${topic}</div><div class="text-sm font-semibold text-[#2D6A4F]">${data.correct}/${data.marked} (${pct}%)</div></div><div class="h-2 bg-[#D4C9A8] rounded-full overflow-hidden"><div class="h-full progress-fill transition-all duration-500" style="width:${barWidth}%"></div></div>`;area.appendChild(row);});}
 </script>
 </body>
 </html>
